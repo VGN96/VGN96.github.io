@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vaishali Ranpara | Backend Developer</title>
+<meta name="description" content="Backend developer building APIs and systems with C#, ASP.NET Core, MVC, Web API, and Angular.">
+<style>
+  :root { --bg:#f8fafc; --surface:#ffffff; --surface2:#f1f5f9; --text:#0f172a; --muted:#475569; --accent:#0369a1; --accent2:#0369a1; --border:#e2e8f0; --ok:var(--accent); color-scheme: light; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg:#0b1120; --surface:#111a2e; --surface2:#16213a; --text:#e2e8f0; --muted:#94a3b8; --accent:#7dd3fc; --accent2:#7dd3fc; --border:#1e2a44; --ok:var(--accent); color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg:#0b1120; --surface:#111a2e; --surface2:#16213a; --text:#e2e8f0; --muted:#94a3b8; --accent:#7dd3fc; --accent2:#7dd3fc; --border:#1e2a44; --ok:var(--accent); color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; line-height:1.6; }
+  .wrap { max-width:1040px; margin:0 auto; padding:0 1.25rem; }
+  a { color:var(--accent); }
+  h1,h2,h3 { margin:0; line-height:1.2; }
+  p { margin:0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--bg); border-bottom:1px solid var(--border); padding-top:env(safe-area-inset-top,0px); }
+  header.top .wrap { display:flex; justify-content:space-between; align-items:center; height:60px; }
+  .brand { font-weight:800; color:var(--text); text-decoration:none; }
+  nav a { color:var(--muted); text-decoration:none; margin-left:1.1rem; font-size:.92rem; }
+  nav a:hover { color:var(--text); }
+  .hero { padding:5rem 0 3.5rem; }
+  .badge { display:inline-block; padding:.35rem .8rem; border:1px solid var(--border); border-radius:999px; background:var(--surface); font-size:.85rem; color:var(--muted); margin-bottom:1.25rem; }
+  .hero h1 { font-size:clamp(2.2rem,6vw,3.8rem); letter-spacing:-.02em; }
+  .hero h1 span { color:var(--accent); }
+  .lead { color:var(--muted); font-size:1.12rem; max-width:640px; margin-top:1.1rem; }
+  .btns { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.75rem; }
+  .btn { padding:.7rem 1.2rem; border-radius:10px; text-decoration:none; font-weight:600; border:1px solid var(--accent); color:var(--accent); background:transparent; font-size:1rem; cursor:pointer; font-family:inherit; }
+  .btn.solid { background:var(--accent); color:#fff; }
+  .chips { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:2rem; }
+  .chip { font-size:.85rem; padding:.3rem .7rem; border-radius:8px; background:var(--surface); border:1px solid var(--border); }
+  section { padding:4rem 0; border-top:1px solid var(--border); }
+  .label { color:var(--accent); font-size:.82rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.5rem; }
+  .title { font-size:clamp(1.6rem,3.2vw,2.1rem); margin-bottom:.6rem; }
+  .sub { color:var(--muted); max-width:680px; margin-bottom:2rem; }
+  .metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:1rem; margin-bottom:2rem; }
+  .metric { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1.1rem; }
+  .metric .n { font-size:1.6rem; font-weight:800; color:var(--accent); }
+  .metric .d { color:var(--muted); font-size:.9rem; }
+  .projects { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.1rem; }
+  .project { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:1.4rem; display:flex; flex-direction:column; gap:.7rem; }
+  .project h3 { font-size:1.15rem; }
+  .project .role { color:var(--accent2); font-size:.9rem; font-weight:600; }
+  .project p { color:var(--muted); font-size:.95rem; }
+  .tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:auto; }
+  .tag { font-size:.78rem; padding:.2rem .55rem; border-radius:6px; background:var(--surface2); color:var(--muted); }
+  .explorer { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:1.5rem; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:1.5rem; }
+  .stack { display:flex; flex-direction:column; gap:.5rem; }
+  .layer { width:100%; text-align:left; background:var(--surface2); border:1px solid var(--border); color:var(--text); border-radius:10px; padding:.85rem 1rem; cursor:pointer; font-family:inherit; font-size:.98rem; transition:border-color .15s; }
+  .layer small { display:block; color:var(--muted); font-size:.82rem; }
+  .layer[aria-pressed="true"] { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent); }
+  .layer:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .arrow { text-align:center; color:var(--muted); font-size:.9rem; line-height:1; }
+  .detail { background:var(--surface2); border-radius:12px; padding:1.25rem; min-height:220px; }
+  .detail h3 { font-size:1.1rem; margin-bottom:.6rem; }
+  .detail dt { font-weight:700; margin-top:.7rem; font-size:.9rem; color:var(--accent2); }
+  .detail dd { margin:.2rem 0 0; color:var(--text); font-size:.95rem; }
+  .note { color:var(--muted); font-size:.85rem; margin-top:1rem; }
+  .about { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; align-items:start; }
+  .about p { color:var(--muted); margin-bottom:1rem; }
+  .contact { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.25rem; text-align:center; }
+  .contact p { color:var(--muted); max-width:560px; margin:.6rem auto 0; }
+  .contact .btns { justify-content:center; }
+  footer { padding:2rem 0 calc(2rem + env(safe-area-inset-bottom,0px)); color:var(--muted); font-size:.9rem; border-top:1px solid var(--border); }
+  @media (max-width:760px) {
+    .explorer, .about { grid-template-columns:1fr; }
+    nav a { margin-left:.7rem; font-size:.85rem; }
+    .hero { padding-top:3.5rem; }
+  }
+  .flow-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:1rem; margin-bottom:1.25rem; overflow:hidden; }
+  .flow { width:100%; height:auto; display:block; }
+  .fnode { fill:var(--surface2); stroke:var(--border); stroke-width:1; }
+  .fnode.hot { stroke:var(--accent); stroke-width:1.5; }
+  .ftext { fill:var(--text); font-size:14px; font-family:system-ui,sans-serif; }
+  .fline { stroke:var(--border); stroke-width:2; stroke-dasharray:6 6; animation:dash 1.2s linear infinite; }
+  .packet { fill:var(--accent2); }
+  .fnode.hot { animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes dash { to { stroke-dashoffset:-24; } }
+  @keyframes pulse { 0%,100% { filter:drop-shadow(0 0 0 transparent); } 50% { filter:drop-shadow(0 0 6px var(--accent)); } }
+  .api-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.4fr); gap:1.25rem; }
+  .endpoints { display:flex; flex-direction:column; gap:.55rem; }
+  .ep { text-align:left; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.9rem; background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:10px; padding:.7rem .9rem; cursor:pointer; transition:transform .15s, border-color .15s; }
+  .ep:hover { transform:translateX(4px); border-color:var(--accent); }
+  .ep:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .ep .m { color:var(--ok); font-weight:700; margin-right:.4rem; }
+  .api-out { background:var(--surface2); border:1px solid var(--border); border-radius:14px; padding:1rem; min-height:260px; }
+  .api-status { font-size:.85rem; color:var(--muted); margin-bottom:.6rem; font-family:ui-monospace,monospace; }
+  .api-status.ok { color:var(--ok); }
+  .api-status.wait { color:var(--accent); }
+  pre { margin:0; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.85rem; white-space:pre-wrap; word-break:break-word; color:var(--text); line-height:1.55; }
+  .reveal { animation:reveal .35s ease-out; }
+  @keyframes reveal { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  @media (max-width:760px) { .api-grid { grid-template-columns:1fr; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } }
+  .skill-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+  .skill-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1.25rem; }
+  .skill-card h3 { font-size:1rem; margin-bottom:.75rem; }
+  .skill-card .chips { display:flex; flex-wrap:wrap; gap:.4rem; margin-top:0; }
+  .icons { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.75rem; }
+  .contact .icons { justify-content:center; }
+  .icon-link { width:48px; height:48px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--accent); display:inline-flex; align-items:center; justify-content:center; text-decoration:none; transition:transform .15s, border-color .15s; }
+  .icon-link:hover { transform:translateY(-2px); border-color:var(--accent); }
+  .icon-link:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+  .spot { position:relative; overflow:hidden; transition:border-color .25s; }
+  .spot > * { position:relative; }
+  .spot::before { content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .3s; background:radial-gradient(320px circle at var(--x,50%) var(--y,50%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); }
+  .spot:hover::before { opacity:1; }
+  .spot:hover { border-color:color-mix(in srgb, var(--accent) 40%, var(--border)); }
+  .req-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:1.25rem; display:flex; flex-direction:column; gap:1rem; }
+  .fl { display:flex; flex-direction:column; gap:.35rem; font-size:.9rem; color:var(--muted); }
+  .fl[hidden] { display:none; }
+  .fl select, .fl input { font:inherit; font-size:.95rem; color:var(--text); background:var(--surface2); border:1px solid var(--border); border-radius:8px; padding:.6rem .7rem; }
+  .url { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:.85rem; background:var(--surface2); border-radius:8px; padding:.6rem .7rem; word-break:break-all; color:var(--accent); }
+  .send { font:inherit; font-weight:600; background:var(--accent); color:var(--bg); border:0; border-radius:10px; padding:.7rem 1rem; cursor:pointer; }
+  .send:focus-visible, .fl select:focus-visible, .fl input:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  .hint { font-size:.85rem; color:var(--muted); margin:0; }
+  header.top nav { overflow-x:auto; white-space:nowrap; max-width:72%; }
+  .dec { margin:0; display:grid; gap:.35rem; }
+  .dec dt { font-size:.8rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--accent); margin-top:.5rem; }
+  .dec dt:first-child { margin-top:0; }
+  .dec dd { margin:0; color:var(--text); font-size:.95rem; }
+  .panel[hidden] { display:none !important; }
+  .panel:not([hidden]) { animation:panelIn .35s ease-out; }
+  @keyframes panelIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+  header.top nav a[aria-current="page"] { color:var(--accent); }
+  .tl { display:grid; gap:.75rem; margin-top:1rem; }
+  .tl-row { display:grid; grid-template-columns:170px 1fr; gap:1rem; padding:.9rem 1.1rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; }
+  .tl-row .when { color:var(--muted); font-size:.9rem; }
+  .tl-row strong { display:block; }
+  @media (max-width:640px) { .tl-row { grid-template-columns:1fr; gap:.25rem; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Vaishali Ranpara</a>
+    <nav>
+      <a href="#work">Projects</a>
+      <a href="#stack">Stack</a>
+      <a href="#explorer">Architecture</a>
+      <a href="#api">API</a>
+      <a href="#decisions">Decisions</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="wrap hero">
+        <h1>Hi, I'm Vaishali.<br><span>Backend Developer</span></h1>
+    <p class="lead">I build APIs and backend systems in C# on ASP.NET Core, MVC, and Web API, and I work with Angular on the front end when a project needs it.</p>
+    <div class="icons"><a class="icon-link" href="#work" aria-label="See my work" title="See my work"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a><a class="icon-link" href="#contact" aria-label="Hire me" title="Hire me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18"/></svg></a></div>
+    <div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">Web API</span><span class="chip">Angular</span></div>
+  </div>
+
+  <section id="work" class="panel">
+    <div class="wrap">
+      <p class="label">Impact at a glance</p>
+      <h2 class="title">Numbers from my work</h2>
+      <p class="sub">Measured results from production projects.</p>
+      <div class="metrics">
+        <div class="metric spot"><div class="n">40%</div><div class="d">Lower API response times through query tuning and Redis caching</div></div>
+        <div class="metric spot"><div class="n">60%</div><div class="d">Faster deployments, cutting pipeline time from 45 to 18 minutes</div></div>
+        <div class="metric spot"><div class="n">100K+</div><div class="d">Transactions handled by systems I architected</div></div>
+        <div class="metric spot"><div class="n">99.5%</div><div class="d">Uptime across real-time courier integration APIs</div></div>
+      </div>
+
+      <p class="label">Selected projects</p>
+      <h2 class="title">What I've built</h2>
+      <p class="sub">Client names are kept private. Details are shared on request.</p>
+      <div class="projects">
+        <article class="project spot">
+          <h3>Financial Management and Analytics Platform</h3>
+          <p>Led a backend team on a platform handling transactions and reporting. Implemented JWT authentication, HTTPS, and role-based authorization, and designed SQL Server schemas.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">JWT</span><span class="tag">Role-based auth</span><span class="tag">SQL Server</span></div>
+        </article>
+        <article class="project spot">
+          <h3>Workflow Management System</h3>
+          <p>Cut API response times with query tuning and Redis caching for 500+ concurrent users. Built Azure DevOps CI/CD pipelines for faster, repeatable releases.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">Redis</span><span class="tag">Azure DevOps</span><span class="tag">Microservices</span></div>
+        </article>
+        <article class="project spot">
+          <h3>E-commerce Platform</h3>
+          <p>Owned the full lifecycle from requirements to deployment. Built payment gateway integrations, a product catalog for about 50K SKUs, and Redis caching for the catalog.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">SQL Server</span><span class="tag">Redis</span><span class="tag">Payment gateways</span></div>
+        </article>
+        <article class="project spot">
+          <h3>Real-time Logistics and Tracking</h3>
+          <p>Built map-based tracking apps handling 10K+ concurrent events, including live flight tracking. Designed Web APIs that synced job data across courier systems with 99.5% uptime.</p>
+          <div class="tags"><span class="tag">ASP.NET MVC</span><span class="tag">AngularJS</span><span class="tag">Web API</span><span class="tag">Real-time data</span></div>
+        </article>
+        <article class="project spot">
+          <h3>Enterprise Insurance Applications</h3>
+          <p>Enhanced legacy ASP.NET MVC insurance platforms with pagination and Redis caching, improving throughput by 35%.</p>
+          <div class="tags"><span class="tag">ASP.NET MVC</span><span class="tag">Redis</span><span class="tag">Performance</span></div>
+        </article>
+        <article class="project spot">
+          <h3>Client Web APIs</h3>
+          <p>Architecting and building ASP.NET Core Web APIs for client projects, with a focus on system design, scalability, and mentoring.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">Web API</span><span class="tag">Clean Architecture</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="panel">
+    <div class="wrap">
+      <p class="label">Tech stack</p>
+      <h2 class="title">What I work with</h2>
+      <p class="sub">The tools I use to design and ship production systems.</p>
+      <div class="skill-grid">
+        <div class="skill-card spot"><h3>Backend and architecture</h3><div class="chips"><span class="chip">C#</span><span class="chip">ASP.NET Core</span><span class="chip">ASP.NET MVC</span><span class="chip">Entity Framework Core</span><span class="chip">Dapper</span><span class="chip">Clean Architecture</span><span class="chip">Microservices</span><span class="chip">RESTful API design</span></div></div>
+        <div class="skill-card spot"><h3>Design patterns</h3><div class="chips"><span class="chip">Repository</span><span class="chip">Unit of Work</span><span class="chip">Factory</span><span class="chip">Strategy</span><span class="chip">SOLID</span></div></div>
+        <div class="skill-card spot"><h3>Database</h3><div class="chips"><span class="chip">SQL Server</span><span class="chip">Azure SQL</span><span class="chip">T-SQL</span><span class="chip">Query tuning</span><span class="chip">Normalization</span></div></div>
+        <div class="skill-card spot"><h3>Cloud and DevOps</h3><div class="chips"><span class="chip">Azure</span><span class="chip">Azure DevOps</span><span class="chip">CI/CD</span><span class="chip">Redis</span><span class="chip">Application Insights</span><span class="chip">Git</span></div></div>
+        <div class="skill-card spot"><h3>Security</h3><div class="chips"><span class="chip">JWT</span><span class="chip">Role-based authorization</span><span class="chip">HTTPS</span><span class="chip">Secure coding</span></div></div>
+        <div class="skill-card spot"><h3>Frontend</h3><div class="chips"><span class="chip">Angular</span><span class="chip">AngularJS</span><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="explorer" class="panel">
+    <div class="wrap">
+      <p class="label">Architecture explorer</p>
+      <h2 class="title">How a request flows through a system</h2>
+      <p class="sub">Select a layer to see what it does and why it's there.</p>
+      <div class="explorer">
+        <div class="stack" id="layers" role="group" aria-label="System layers"></div>
+        <div class="detail" id="detail" aria-live="polite"></div>
+      </div>
+      
+    </div>
+  </section>
+
+  <section id="api" class="panel">
+    <div class="wrap">
+      <p class="label">API playground</p>
+      <h2 class="title">Query my projects API</h2>
+      <p class="sub">Build a request and see the response an ASP.NET Core API would return, including filters and error handling. Responses are simulated in your browser.</p>
+      <div class="flow-card">
+        <svg viewBox="0 0 640 110" class="flow" role="img" aria-label="Request flows from browser to API to SQL Server">
+          <rect x="20" y="30" width="150" height="50" rx="12" class="fnode"/>
+          <text x="95" y="60" text-anchor="middle" class="ftext">Browser</text>
+          <rect x="245" y="30" width="150" height="50" rx="12" class="fnode hot"/>
+          <text x="320" y="60" text-anchor="middle" class="ftext">ASP.NET Core API</text>
+          <rect x="470" y="30" width="150" height="50" rx="12" class="fnode"/>
+          <text x="545" y="60" text-anchor="middle" class="ftext">SQL Server</text>
+          <line x1="170" y1="55" x2="245" y2="55" class="fline"/>
+          <line x1="395" y1="55" x2="470" y2="55" class="fline"/>
+          <circle r="6" class="packet">
+            <animateMotion dur="2.4s" repeatCount="indefinite" path="M170,55 L470,55"/>
+          </circle>
+        </svg>
+      </div>
+      <div class="api-grid">
+        <div class="req-card">
+          <label class="fl">Endpoint
+            <select id="ep">
+              <option value="projects">GET /api/projects</option>
+              <option value="project">GET /api/projects/{id}</option>
+              <option value="skills">GET /api/skills</option>
+              <option value="health">GET /api/health</option>
+            </select>
+          </label>
+          <label class="fl" id="row-tech">Filter by technology
+            <select id="tech"><option value="">All technologies</option></select>
+          </label>
+          <label class="fl" id="row-id" hidden>Project id
+            <input id="pid" type="text" value="2" inputmode="numeric" autocomplete="off">
+          </label>
+          <div class="url" id="url" aria-live="polite"></div>
+          <button class="send" id="send" type="button">Send request</button>
+          <p class="hint">Try an id like 99 or abc to see error responses.</p>
+        </div>
+        <div class="api-out">
+          <div class="api-status" id="api-status">Ready</div>
+          <pre id="api-body">// The response appears here</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decisions" class="panel">
+    <div class="wrap">
+      <p class="label">Decisions</p>
+      <h2 class="title">Why I built things the way I did</h2>
+      <p class="sub">Short notes on real engineering decisions: the context, what I chose, the result, and the trade-off I accepted.</p>
+      <div class="projects">
+        <article class="project spot">
+          <h3>Keeping claim pages fast with caching and on-demand fax loading</h3>
+          <dl class="dec">
+            <dt>Context</dt><dd>Opening a claim took about 20 seconds. The cause was the fax API, because the RingCentral fax API was slow to respond, and every claim page called it on load, even when the user never opened the fax tab.</dd>
+            <dt>Goal</dt><dd>Claim details should open without waiting on fax data, and the fax API should only be called when someone actually needs it.</dd>
+            <dt>Decision</dt><dd>Load the other claim details first, and call the fax API only when the Fax tab is clicked. Cache the fax responses in Redis so repeat views don't call RingCentral again.</dd>
+            <dt>Result</dt><dd>Claim details now open in about 2 seconds, down from about 20, and unnecessary fax requests are avoided.</dd>
+            <dt>Trade-off</dt><dd>Fax content appears a moment later the first time the tab is opened, so the loading state has to be clear. Cached fax data can also go stale, so it needs an expiry rule.</dd>
+          </dl>
+        </article>
+        <article class="project spot">
+          <h3>Keeping the database free for a complex audit job</h3>
+          <dl class="dec">
+            <dt>Context</dt><dd>I built an automated background job that audits claims processed by about 100 employees across two shifts. The claims span 14 pools and roughly 8 workflow types, with more than 1,000 claims per employee. The audit percentage is dynamic and depends on what each employee processed, using 10 to 12 complex conditions and filters. The single query was too heavy to load at first.</dd>
+            <dt>Goal</dt><dd>Produce correct audit results first, then keep the database free so the job doesn't slow down live claim processing.</dd>
+            <dt>Decision</dt><dd>Get the output right first, then add caching, then move the filtering into C# and use Dapper to pull only the data the job needs. Last, tune the SQL so the database does less work. All filtering now runs on the server.</dd>
+            <dt>Result</dt><dd>The audit job now finishes in about 3 seconds, down from about 1 minute, without overloading the database.</dd>
+            <dt>Trade-off</dt><dd>More of the work now happens in the application, so it uses more memory and CPU on the server. The filtering rules also have to stay in step with the business rules.</dd>
+          </dl>
+        </article>
+        <article class="project spot">
+          <h3>Automating releases with Azure DevOps</h3>
+          <dl class="dec">
+            <dt>Context</dt><dd>Releases were slow and depended on manual steps, so each deployment took longer than it should.</dd>
+            <dt>Decision</dt><dd>Set up the standard Azure DevOps structure: source control in Azure Repos, build artifacts from every build, and approval gates before each deployment.</dd>
+            <dt>Result</dt><dd>Deployment time dropped from 45 minutes to 18 minutes, about 60% faster.</dd>
+            <dt>Trade-off</dt><dd>The pipelines need upkeep as the project changes, and slow or flaky tests affect every release.</dd>
+          </dl>
+        </article>
+        <article class="project spot">
+          <h3>Role-based access for a multi-client internal platform</h3>
+          <dl class="dec">
+            <dt>Context</dt><dd>I built internal software for multiple clients, with an 8-level hierarchy. Each level needs to see only its own portal.</dd>
+            <dt>Decision</dt><dd>Users sign in through Microsoft authentication, and a role is assigned to each user. The role decides which portal they can open and what they can do inside it.</dd>
+            <dt>Result</dt><dd>Each person signs in once with their Microsoft account and lands in the portal that matches their role.</dd>
+            <dt>Trade-off</dt><dd>With eight levels, the role design takes careful planning, and roles must be updated whenever the hierarchy changes.</dd>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="panel">
+    <div class="wrap about">
+      <div>
+        <p class="label">About me</p>
+        <h2 class="title">Backend focused, with frontend experience</h2>
+        <p>About six years building .NET systems, from REST APIs and MVC applications to Angular interfaces. I care about code that stays readable after the project ships.</p>
+        <p>I've led developers and owned architecture decisions, so I can explain trade-offs to engineers and non-technical stakeholders alike.</p>
+      </div>
+      <div class="metrics" style="grid-template-columns:1fr; margin:0;">
+        <div class="metric spot"><div class="n">Team lead</div><div class="d">Mentoring developers and owning delivery</div></div>
+        
+      </div>
+    </div>
+    <div class="wrap">
+      <p class="label">Experience</p>
+      <h2 class="title">Career timeline</h2>
+      <div class="tl">
+        <div class="tl-row"><span class="when">2026 – Present</span><div><strong>Freelance Senior .NET Developer</strong>De Studio</div></div>
+        <div class="tl-row"><span class="when">Apr 2025 – Jan 2026</span><div><strong>Team Lead</strong>JDBR FinServ</div></div>
+        <div class="tl-row"><span class="when">Dec 2021 – Aug 2024</span><div><strong>Senior Software Developer</strong>Outamation</div></div>
+        <div class="tl-row"><span class="when">Mar 2020 – Jul 2021</span><div><strong>Software Developer</strong>Saurabh Global</div></div>
+        <div class="tl-row"><span class="when">Oct 2019 – Jan 2020</span><div><strong>Web Application Developer</strong>LanceSoft</div></div>
+        <div class="tl-row"><span class="when">Jun 2018 – Jun 2019</span><div><strong>Senior Software Engineer</strong>Samyak Infotech</div></div>
+        <div class="tl-row"><span class="when">2018</span><div><strong>B.Sc. Computer Science Engineering</strong>B.H. Gardi College of Engineering &amp; Technology</div></div>
+      </div>
+    </div>
+    <div class="wrap" style="margin-top:3.5rem;">
+      <p class="label">Work style</p>
+      <h2 class="title">How I work</h2>
+      <div class="grid2">
+        <div class="card spot"><h3>Clear code review standards</h3><p class="muted">I set review standards for the team so changes are judged the same way, and I explain the reasons behind feedback.</p></div>
+        <div class="card spot"><h3>Requirements before code</h3><p class="muted">I turn business requirements into a technical design first, so the team agrees on the approach before building.</p></div>
+        <div class="card spot"><h3>Agile delivery</h3><p class="muted">I plan work in sprints, keep technical documentation current, and raise risks early when scope changes.</p></div>
+        <div class="card spot"><h3>Growing other developers</h3><p class="muted">I mentor developers on Clean Architecture and code quality, so the team can own the work after I step back.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="panel">
+    <div class="wrap">
+      <div class="contact spot">
+        <p class="label">Let's work together</p>
+        <h2 class="title">Let's talk</h2>
+        <p>Share the role or project, your timeline, and your stack.</p>
+        <div class="icons"><a class="icon-link" href="mailto:sonivaishali1996@gmail.com" aria-label="Email me" title="Email me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a><a class="icon-link" href="https://www.linkedin.com/in/vaishali-ranpara-3a4b24a8/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></a><a class="icon-link" href="https://github.com/VGN96" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">© Vaishali Ranpara · Backend Developer</div>
+</footer>
+
+<script>
+  var layers = [
+    { name: "Angular UI", sub: "Component, form validation, HTTP client",
+      what: "Screens and user input. Components call services that wrap HttpClient, so views stay free of API details.",
+      why: "Keeps the UI responsive and testable. Validation runs on the client for fast feedback and again on the server for safety.",
+      tradeoff: "More moving parts on the client, so shared models and error handling need a single convention." },
+    { name: "ASP.NET Core Web API", sub: "Controllers, DTOs, validation, auth",
+      what: "Receives HTTP requests, validates input, maps DTOs to domain models, and returns consistent responses.",
+      why: "A thin controller layer keeps HTTP concerns in one place and makes business rules reusable.",
+      tradeoff: "Extra mapping code, which is worth it once the domain grows beyond simple CRUD." },
+    { name: "Application services", sub: "Use cases and business rules",
+      what: "Coordinates a use case: checks rules, calls repositories, and raises the events the rest of the system needs.",
+      why: "Business logic lives here, not in controllers or the database, so it can be tested without a web server.",
+      tradeoff: "Can become a pass-through layer on simple features, so it's kept lean where logic is trivial." },
+    { name: "Repositories and data access", sub: "EF Core or stored procedures",
+      what: "Reads and writes data. Complex reporting queries use stored procedures; standard CRUD uses EF Core.",
+      why: "Choosing the right tool per query keeps performance predictable without rewriting everything.",
+      tradeoff: "Two data access styles need clear team guidelines so they don't drift apart." },
+    { name: "SQL Server", sub: "Schema, indexes, stored procedures",
+      what: "Stores the system's data with indexes tuned to the most frequent queries.",
+      why: "Indexes and query plans are reviewed during releases, which is where most latency gains came from in my projects.",
+      tradeoff: "Schema changes need migration discipline, so every change goes through versioned scripts." }
+  ];
+
+  var stack = document.getElementById("layers");
+  var detail = document.getElementById("detail");
+  var buttons = [];
+
+  function show(i) {
+    var l = layers[i];
+    buttons.forEach(function (b, j) { b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+    detail.innerHTML = "<h3>" + l.name + "</h3><dl>" +
+      "<dt>What it does</dt><dd>" + l.what + "</dd>" +
+      "<dt>Why it's there</dt><dd>" + l.why + "</dd>" +
+      "<dt>Trade-off</dt><dd>" + l.tradeoff + "</dd></dl>";
+  }
+
+  layers.forEach(function (l, i) {
+    var b = document.createElement("button");
+    b.className = "layer";
+    b.setAttribute("aria-pressed", "false");
+    b.innerHTML = l.name + "<small>" + l.sub + "</small>";
+    b.addEventListener("click", function () { show(i); });
+    buttons.push(b);
+    stack.appendChild(b);
+    if (i < layers.length - 1) {
+      var a = document.createElement("div");
+      a.className = "arrow";
+      a.setAttribute("aria-hidden", "true");
+      a.textContent = "↓";
+      stack.appendChild(a);
+    }
+  });
+
+  show(0);
+</script>
+<script>
+(function () {
+  var projects = [
+    { id: 1, title: "Financial Management and Analytics Platform", role: "Team Lead", period: "2025", tech: ["ASP.NET Core", "JWT", "SQL Server"], summary: "Led a backend team on a platform handling transactions and reporting, with JWT and role-based authorization." },
+    { id: 2, title: "Workflow Management System", role: "Senior Software Developer", period: "2021–2024", tech: ["ASP.NET Core", "Redis", "Azure DevOps"], summary: "Cut API response times by about 40% and deployment time from 45 to 18 minutes." },
+    { id: 3, title: "E-commerce Platform", role: "Software Developer", period: "2020–2021", tech: ["ASP.NET Core", "SQL Server", "Redis"], summary: "Payment gateway integrations and a product catalog for about 50K SKUs." },
+    { id: 4, title: "Real-time Logistics and Tracking", role: "Senior Software Engineer", period: "2018–2019", tech: ["ASP.NET MVC", "AngularJS", "Web API"], summary: "Tracking apps handling 10K+ concurrent events, with 99.5% uptime on courier integrations." },
+    { id: 5, title: "Enterprise Insurance Applications", role: "Web Application Developer", period: "2019", tech: ["ASP.NET MVC", "Redis"], summary: "Legacy MVC platforms improved with pagination and caching, raising throughput by 35%." },
+    { id: 6, title: "Client Web APIs", role: "Freelance Senior .NET Developer", period: "2026–present", tech: ["ASP.NET Core", "Web API", "Clean Architecture"], summary: "ASP.NET Core Web APIs for client projects, focused on system design and scalability." }
+  ];
+  var skills = {
+    backend: ["C#", "ASP.NET Core", "ASP.NET MVC", "Entity Framework Core", "Dapper", "Web API", "REST API"],
+    data: ["SQL Server", "Azure SQL", "T-SQL", "Redis"],
+    cloud: ["Azure DevOps", "CI/CD", "Application Insights"],
+    frontend: ["Angular", "AngularJS", "JavaScript"]
+  };
+  var reasons = { 200: "OK", 400: "Bad Request", 404: "Not Found" };
+
+  var ep = document.getElementById("ep");
+  var tech = document.getElementById("tech");
+  var pid = document.getElementById("pid");
+  var rowId = document.getElementById("row-id");
+  var rowTech = document.getElementById("row-tech");
+  var urlEl = document.getElementById("url");
+  var sendBtn = document.getElementById("send");
+  var statusEl = document.getElementById("api-status");
+  var bodyEl = document.getElementById("api-body");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var techs = [];
+  projects.forEach(function (p) { p.tech.forEach(function (t) { if (techs.indexOf(t) < 0) techs.push(t); }); });
+  techs.sort().forEach(function (t) {
+    var o = document.createElement("option");
+    o.value = t; o.textContent = t; tech.appendChild(o);
+  });
+
+  function handle(kind, idText, techFilter) {
+    if (kind === "projects") {
+      var list = projects.filter(function (p) { return !techFilter || p.tech.indexOf(techFilter) >= 0; });
+      return { code: 200, path: "/api/projects" + (techFilter ? "?tech=" + encodeURIComponent(techFilter) : ""),
+               body: { total: list.length, data: list, source: "sample-data" } };
+    }
+    if (kind === "project") {
+      var path = "/api/projects/" + idText;
+      if (!/^\d+$/.test(idText)) {
+        return { code: 400, path: path, body: { title: "Bad Request", status: 400, errors: { id: ["'" + idText + "' is not a valid integer."] } } };
+      }
+      var found = projects.filter(function (p) { return p.id === Number(idText); })[0];
+      if (!found) {
+        return { code: 404, path: path, body: { title: "Not Found", status: 404, detail: "No project found with id " + idText + "." } };
+      }
+      return { code: 200, path: path, body: { data: found, source: "sample-data" } };
+    }
+    if (kind === "skills") return { code: 200, path: "/api/skills", body: { data: skills, source: "sample-data" } };
+    return { code: 200, path: "/api/health", body: { status: "Healthy", version: "1.4.2", source: "sample-data" } };
+  }
+
+  function current() { return handle(ep.value, pid.value.trim(), tech.value); }
+
+  function syncControls() {
+    rowId.hidden = ep.value !== "project";
+    rowTech.hidden = ep.value !== "projects";
+    urlEl.textContent = "GET " + current().path;
+  }
+
+  function send() {
+    var r = current();
+    var msg = r.code + " " + reasons[r.code];
+    if (r.code === 200 && r.body.total !== undefined) msg += " · " + r.body.total + " result" + (r.body.total === 1 ? "" : "s");
+    statusEl.className = "api-status " + (r.code === 200 ? "ok" : "");
+    statusEl.textContent = msg;
+    bodyEl.textContent = JSON.stringify(r.body, null, 2);
+    if (!reduce) { bodyEl.classList.remove("reveal"); void bodyEl.offsetWidth; bodyEl.classList.add("reveal"); }
+  }
+
+  ep.addEventListener("change", function () { syncControls(); send(); });
+  tech.addEventListener("change", function () { syncControls(); send(); });
+  pid.addEventListener("input", syncControls);
+  sendBtn.addEventListener("click", send);
+  syncControls();
+  send();
+})();
+</script>
+
+<script>
+document.querySelectorAll('.spot').forEach(function (el) {
+  el.addEventListener('pointermove', function (e) {
+    var r = el.getBoundingClientRect();
+    el.style.setProperty('--x', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--y', (e.clientY - r.top) + 'px');
+  });
+});
+</script>
+<script>
+(function () {
+  var panels = Array.prototype.slice.call(document.querySelectorAll('section.panel'));
+  var ids = panels.map(function (p) { return p.id; });
+  var DEFAULT = 'work';
+
+  function show(id) {
+    if (ids.indexOf(id) < 0) id = DEFAULT;
+    panels.forEach(function (p) { p.hidden = (p.id !== id); });
+    document.querySelectorAll('header.top nav a').forEach(function (a) {
+      if (a.getAttribute('href') === '#' + id) { a.setAttribute('aria-current', 'page'); }
+      else { a.removeAttribute('aria-current'); }
+    });
+  }
+
+  function fromHash(scroll) {
+    var id = location.hash.replace('#', '') || DEFAULT;
+    show(id);
+    if (scroll) {
+      var el = document.getElementById(ids.indexOf(id) < 0 ? DEFAULT : id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  window.addEventListener('hashchange', function () { fromHash(true); });
+  fromHash(false);
+})();
+</script>
+</body>
+</html>
