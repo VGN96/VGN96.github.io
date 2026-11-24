@@ -158,6 +158,13 @@
 
   .code-win { max-width:100%; margin-top:1.25rem; }
   .code-body { font-size:.92rem; }
+
+  @media (min-width:960px) {
+    header.top nav { width:100%; }
+    header.top nav a.tab { display:block; width:100%; margin:0; padding:.55rem .85rem; border:none; border-left:2px solid transparent; border-radius:0; background:transparent; font-size:.86rem; white-space:nowrap; }
+    header.top nav a.tab:hover { color:var(--text); background:var(--surface2); }
+    header.top nav a.tab[aria-current="page"] { color:var(--text); border-left-color:var(--accent); background:var(--surface2); border-bottom:none; }
+  }
 </style>
 </head>
 <body>
